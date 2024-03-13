@@ -49,5 +49,4 @@ Step4: verify if your application is up and running using localhost:8080
 
 Step5:  To check the size of your docker image. (Size = 143 MB)
 “docker image ls”
-
- 
+S
