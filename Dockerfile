@@ -7,5 +7,5 @@ RUN npm install
 FROM node:alpine as main
 
 COPY --from=build /Node_js_app /
-EXPOSE 8090
+EXPOSE 8080
 CMD ["index.js"]
