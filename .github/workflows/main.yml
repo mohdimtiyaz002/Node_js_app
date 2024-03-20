@@ -17,14 +17,16 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v2
+        uses: docker/metadata-action@v4
         with:
           images: mohdimtiyaz002/githubnodeapp
+          tags: |
+            type=raw,value={{(date +'%Y-%m-%d_%H-%M')}}
     
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: |
-             type=semver,pattern={{version}}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
