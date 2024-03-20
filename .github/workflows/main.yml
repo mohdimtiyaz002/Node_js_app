@@ -17,7 +17,7 @@ jobs:
 
       - name: Determine version number
         id: version
-        run: echo "::set-output name=version::v$(( $(git rev-list --count main) + 1 ))"
+        run: echo "::set-output name=version::v${{ github.run_number }}"
     
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
