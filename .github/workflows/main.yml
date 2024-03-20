@@ -15,15 +15,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Get smart tag
-        id: prepare
-        uses: Surgo/docker-smart-tag-action@v2
-        with:
-          docker_image: mohdimtiyaz002/githubnodeapp
+      - name: Determine version number
+        id: version
+        run: echo "::set-output name=version::v$(( $(git rev-list --count HEAD) + 1 ))"
     
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ${{ steps.prepare.outputs.tag }}
+          tags:  mohdimtiyaz002/githubnodeapp:${{ steps.version.outputs.version }}
