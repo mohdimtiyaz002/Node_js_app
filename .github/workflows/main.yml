@@ -24,7 +24,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: >-
-           mohdimtiyaz002/githubnodeapp:${{ steps.version.outputs.version }},
-           mohdimtiyaz002/githubnodeapp:latest
+          tags:  mohdimtiyaz002/githubnodeapp:${{ steps.version.outputs.version }}
+          
 
