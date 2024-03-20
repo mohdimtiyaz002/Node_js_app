@@ -20,8 +20,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: mohdimtiyaz002/githubnodeapp
-          tags: |
-            type=raw,value=$(date +"%Y-%m-%d_%H-%M")
+          tags: "type=raw,value=$(date +'%Y-%m-%d_%H-%M')"
     
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
