@@ -15,17 +15,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
+      - name: Get smart tag
+        id: prepare
+        uses: Surgo/docker-smart-tag-action@v1
         with:
-          images: mohdimtiyaz002/githubnodeapp
-          tags: "type=raw,value=$(date +'%Y-%m-%d_%H-%M')"
+          docker_image: mohdimtiyaz002/githubnodeapp
     
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.prepare.outputs.tag }}
